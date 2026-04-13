@@ -1,42 +1,61 @@
-# 1. 클래스 / 객체 (핵심 개념)
+# 8. 매직 메서드 (Magic Method)
+# 1️⃣ 매직 메서드란?
+# 👉 파이썬이 자동으로 호출해주는 특수 메서드
+# __ (더블 언더스코어)로 시작/끝
+# 우리가 직접 호출 안 해도 실행됨
 
-# ✔ 클래스 (Class)
-# 👉 설계도 / 틀
-# “이런 데이터와 기능을 가진 객체를 만들겠다” 라는 정의
-# 붕어빵 틀 같은 개념
-
+# 2️⃣ 대표 3개 (무조건 알아야 함🔥)
+# ✔ __str__ → 사용자용 출력
 class Person:
-    pass
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return f"이름: {self.name}"
+p = Person("철수")
+print(p)
+
+# ✔ __repr__ → 개발자용 출력
+class Person:
+    def __repr__(self):
+        return "Person 객체"
+
+# ✔ __eq__ → 객체 비교
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+    def __eq__(self, other):
+        return self.name == other.name
+
+p1 = Person("철수")
+p2 = Person("철수")
+
+print(p1 == p2)  # True
+
+# 메서드	역할
+# __init__	생성자
+# __str__	사용자 출력
+# __repr__	디버깅
+# __eq__	비교
+# __len__	길이
+# __add__	+ 연산
+# __getitem__	인덱싱
 
 
-# ✔ 객체 (Object, Instance)
-# 👉 클래스를 기반으로 만들어진 실제 데이터
-# 붕어빵 틀 → 클래스
-# 실제 만들어진 붕어빵 → 객체
-p1 = Person()  # p1이라는 객체(인스턴스) 생성
+# 실전예제
+class Book:
+    def __init__(self, title):
+        self.title = title
 
+    def __str__(self):
+        return f"책 제목: {self.title}"
 
-# 바로 감 잡는 예제
-class Dog:
-    pass
-dog1 = Dog()
-dog2 = Dog()
+    def __eq__(self, other):
+        return self.title == other.title
 
+b1 = Book("파이썬")
+b2 = Book("파이썬")
 
-# 파이썬 특징 (중요 포인트)
-
-# 파이썬은 모든 게 객체다
-
-# x = 10
-# print(type(x))  # <class 'int'>
-
-# 👉 int도 클래스임
-# 👉 10도 객체임
-
-
-class Car:
-    pass
-c1 = Car()
-c2 = Car()
-print(type(c1))
-print(type(c2))
+print(b1)          # 책 제목: 파이썬
+print(b1 == b2)    # True
