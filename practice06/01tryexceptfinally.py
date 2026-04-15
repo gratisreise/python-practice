@@ -48,3 +48,8 @@ except:
 finally:
     f.close()
     print("파일 닫음")
+
+f = open("test.txt", "r")
+data = f.read()
+# 에러 나면?
+# close 안됨 → 리소스 누수
